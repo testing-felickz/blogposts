@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import guru.springframework.blog.Services.EventService;
 import guru.springframework.blog.dto.Event;
 import guru.springframework.blog.util.EncodeUtil;
 
@@ -48,6 +50,20 @@ public class IndexController {
     public void logFakeWrapper(@RequestBody Event event) {
         // Fake - do nothing
         logger.info(EncodeUtil.doNothing(event.getEventId()));
+    }
+
+    @RequestMapping(value = "/eventService", method = RequestMethod.POST)
+    public void eventService(@RequestBody Event event) {
+        // Call downstream service (that logs the raw event id)
+        EventService eventService = new EventService();
+        eventService.insertEvent(event);
+    }
+
+    @RequestMapping(value = "/eventServiceSanitized", method = RequestMethod.POST)
+    public void eventServiceSanitized(@RequestBody Event event) {
+        // Call downstream service (that logs the sanitized event id)
+        EventService eventService = new EventService();
+        eventService.insertEventSanitized(event);
     }
 }
 
