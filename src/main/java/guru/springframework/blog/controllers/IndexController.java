@@ -43,5 +43,11 @@ public class IndexController {
         // Log the escaped event
         logger.info(EncodeUtil.encodeForJava(event.getEventId()));
     }
+
+    @RequestMapping(value = "/logFakeWrapper", method = RequestMethod.POST)
+    public void logFakeWrapper(@RequestBody Event event) {
+        // Log the escaped event
+        logger.info(EncodeUtil.doNothing(event.getEventId()));
+    }
 }
 

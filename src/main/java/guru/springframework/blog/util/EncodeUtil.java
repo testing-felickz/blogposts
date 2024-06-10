@@ -9,4 +9,8 @@ public class EncodeUtil {
         return Encode.forJava(input);
     }
 
+    public static String doNothing(String input) {
+        return input;
+    }
+
 }
