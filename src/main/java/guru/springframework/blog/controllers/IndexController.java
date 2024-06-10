@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
 import guru.springframework.blog.dto.Event;
+import guru.springframework.blog.util.EncodeUtil;
 
 
 @Controller
@@ -34,6 +35,13 @@ public class IndexController {
     public void logEscaped(@RequestBody Event event) {
         // Log the escaped event
         logger.info(Encode.forJava(event.getEventId()));
+    }
+
+
+    @RequestMapping(value = "/logEscapedWrapper", method = RequestMethod.POST)
+    public void logEscapedWrapper(@RequestBody Event event) {
+        // Log the escaped event
+        logger.info(EncodeUtil.encodeForJava(event.getEventId()));
     }
 }
 
