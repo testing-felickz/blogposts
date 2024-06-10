@@ -1,6 +1,7 @@
 package guru.springframework.blog.controllers;
 
 
+import org.owasp.encoder.Encode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -27,9 +28,12 @@ public class IndexController {
     public void log(@RequestBody Event event) {
         // Log the raw event
         logger.info(event.getEventId());
+    }
 
-
-
+    @RequestMapping(value = "/logEscaped", method = RequestMethod.POST)
+    public void logEscaped(@RequestBody Event event) {
+        // Log the escaped event
+        logger.info(Encode.forJava(event.getEventId()));
     }
 }
 
