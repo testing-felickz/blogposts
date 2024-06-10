@@ -33,20 +33,20 @@ public class IndexController {
 
     @RequestMapping(value = "/logEscaped", method = RequestMethod.POST)
     public void logEscaped(@RequestBody Event event) {
-        // Log the escaped event
+        // Log the escaped event directly
         logger.info(Encode.forJava(event.getEventId()));
     }
 
 
     @RequestMapping(value = "/logEscapedWrapper", method = RequestMethod.POST)
     public void logEscapedWrapper(@RequestBody Event event) {
-        // Log the escaped event
+        // Log the escaped event using a wrapper
         logger.info(EncodeUtil.encodeForJava(event.getEventId()));
     }
 
     @RequestMapping(value = "/logFakeWrapper", method = RequestMethod.POST)
     public void logFakeWrapper(@RequestBody Event event) {
-        // Log the escaped event
+        // Fake - do nothing
         logger.info(EncodeUtil.doNothing(event.getEventId()));
     }
 }
